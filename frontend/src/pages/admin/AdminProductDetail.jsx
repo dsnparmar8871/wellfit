@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { productAPI, reviewAPI } from '../../api/index.js';
-import { formatDate, getErrorMsg, getImageUrl } from '../../utils/helpers.js';
+import { formatDate, getErrorMsg, getImageUrl, getProductMainImage } from '../../utils/helpers.js';
 import { useToast } from '../../context/ToastContext.jsx';
 import PageSkeleton from '../../components/ui/PageSkeleton.jsx';
 import Pagination from '../../components/ui/Pagination.jsx';
@@ -119,9 +119,7 @@ export default function AdminProductDetail() {
   if (loadingProduct) return <PageSkeleton variant="detail" />;
   if (!product) return <div className="alert alert-error">Product not found.</div>;
 
-  const firstVariantImage = product.variants?.find((v) => v.image)?.image;
-  const firstExtraImage = product.images?.[0];
-  const displayImage = firstVariantImage || firstExtraImage;
+  const displayImage = getProductMainImage(product);
   const placeholderText = encodeURIComponent((product.productName || product.name || 'Product').slice(0, 10));
   const placeholder = `https://placehold.co/400x500/FFF2E1/A79277?text=${placeholderText}`;
 
