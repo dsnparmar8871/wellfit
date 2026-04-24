@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Legacy - Wellfit Menswear & Selection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FFF2E1;
+      --brown: #A79277;
+      --dark-brown: #6B5B4E;
+      --deep: #3C2A20;
+      --light: #FDF8F2;
+      --accent: #C4A882;
+      --brown-deep: #4A3A2E;
+      --brown-dark: #6B5B4E;
+      --brown-light: #8F7A66;
+      --brown-muted: rgba(167,146,119,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--deep);
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--deep);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167,146,119,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 100% 100%, rgba(167,146,119,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 0% 50%, rgba(196,168,130,0.08) 0%, transparent 60%);
+      background-color: #1a0f0a;
+    }
+
+    /* Rotating ring */
+    .hero-ring {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(167,146,119,0.12);
+      animation: slowSpin 40s linear infinite;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      margin-top: -350px;
+      margin-left: -350px;
+    }
+    .hero-ring::before {
+      content: '';
+      position: absolute;
+      top: 15px; left: 15px; right: 15px; bottom: 15px;
+      border-radius: 50%;
+      border: 1px solid rgba(167,146,119,0.06);
+    }
+    .hero-ring-outer {
+      position: absolute;
+      width: 950px;
+      height: 950px;
+      border-radius: 50%;
+      border: 1px solid rgba(167,146,119,0.06);
+      top: 50%;
+      left: 50%;
+      margin-top: -475px;
+      margin-left: -475px;
+      animation: slowSpin 60s linear infinite reverse;
+    }
+
+    @keyframes slowSpin { to { transform: rotate(360deg); } }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .hero-logo {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      filter: brightness(1.6) saturate(0.7);
+      margin-bottom: 36px;
+      animation: fadeUp 1s ease both;
+      transform-style: preserve-3d;
+      border-radius: 50%;
+    }
+
+    .hero-eyebrow {
+      /* font-family: 'DM Sans', sans-serif; */
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 20px;
+      animation: fadeUp 1s 0.15s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 400;
+      line-height: 0.9;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      margin-top: 28px;
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: rgba(255,242,225,0.5);
+      animation: fadeUp 1s 0.45s ease both;
+    }
+
+    .hero-year-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 48px;
+      padding: 12px 28px;
+      border: 1px solid rgba(167,146,119,0.3);
+      border-radius: 100px;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+    .hero-year-badge span {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--brown);
+    }
+    .hero-year-badge small {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,242,225,0.4);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 49%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,242,225,0.3);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.9s ease both;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(167,146,119,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { position: relative; }
+
+    /* ─── FOUNDED STRIP ─── */
+    .founded-strip {
+      background: var(--brown);
+      overflow: hidden;
+      padding: 16px 0;
+      position: relative;
+    }
+
+    .strip-home-link {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,242,225,0.45);
+      background: rgba(255,242,225,0.12);
+      backdrop-filter: blur(2px);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,242,225,0.9);
+      text-decoration: none;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .strip-home-link:hover {
+      color: var(--cream);
+      background: rgba(255,242,225,0.2);
+      border-color: rgba(255,242,225,0.75);
+      transform: translateY(-1px);
+    }
+    .strip-track {
+      display: flex;
+      gap: 60px;
+      width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+    .strip-item {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--cream);
+      white-space: nowrap;
+      opacity: 0.85;
+    }
+    .strip-dot {
+      color: rgba(255,242,225,0.4);
+      font-size: 6px;
+      vertical-align: middle;
+    }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ─── STORY SECTION ─── */
+    .story {
+      padding: 140px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .story-left { position: relative; }
+
+    .story-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(140px, 18vw, 240px);
+      font-weight: 700;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(167,146,119,0.2);
+      position: absolute;
+      top: -40px;
+      left: -20px;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .story-card {
+      position: relative;
+      z-index: 2;
+      background: var(--light);
+      border-radius: 4px;
+      padding: 52px;
+      box-shadow:
+        0 2px 4px rgba(60,42,32,0.04),
+        0 30px 80px rgba(60,42,32,0.08),
+        inset 0 0 0 1px rgba(167,146,119,0.12);
+      transform: perspective(1000px) rotateY(-3deg) rotateX(2deg);
+      transition: transform 0.6s ease;
+    }
+    .story-card:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+
+    .story-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(167,146,119,0.2);
+    }
+
+    .story-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 500;
+      line-height: 1.25;
+      color: var(--deep);
+      margin-bottom: 20px;
+    }
+
+    .story-card p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--dark-brown);
+    }
+
+    .story-right h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--deep);
+      margin-bottom: 28px;
+    }
+
+    .story-right p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--dark-brown);
+      margin-bottom: 20px;
+    }
+
+    .story-signature {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sig-line {
+      width: 40px;
+      height: 1px;
+      background: var(--brown);
+    }
+    .sig-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--brown);
+    }
+
+    /* ─── HERITAGE TIMELINE ─── */
+    .timeline-section {
+      background: var(--deep);
+      padding: 120px 40px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 80px;
+    }
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.15;
+    }
+
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(167,146,119,0.3) 10%, rgba(167,146,119,0.3) 90%, transparent);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      margin-bottom: 60px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(odd) .tl-content { grid-column: 1; text-align: right; padding-right: 40px; }
+    .timeline-item:nth-child(odd) .tl-empty { grid-column: 3; }
+    .timeline-item:nth-child(even) .tl-content { grid-column: 3; text-align: left; padding-left: 40px; }
+    .timeline-item:nth-child(even) .tl-empty { grid-column: 1; }
+
+    .tl-center {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      position: relative;
+      padding-top: 2px;
+    }
+
+    .tl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brown);
+      box-shadow: 0 0 0 4px rgba(167,146,119,0.15), 0 0 20px rgba(167,146,119,0.3);
+      flex-shrink: 0;
+      margin-top: 0;
+    }
+
+    .tl-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 10px;
+      font-style: italic;
+      color: var(--brown);
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      transform: none;
+      order: -1;
+      letter-spacing: 0.12em;
+      line-height: 1;
+    }
+
+    .tl-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .tl-content p {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,242,225,0.55);
+    }
+
+    /* ─── VALUES ─── */
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4.5vw, 52px);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--brown-deep);
+      margin-bottom: 24px;
+    }
+
+    .section-title em { font-style: italic; color: var(--brown-dark); }
+    .values {
+      padding: 140px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 80px;
+    }
+
+    .values-cta {
+      margin-top: 44px;
+      text-align: center;
+    }
+
+    .values-cta-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid rgba(167,146,119,0.6);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--deep);
+      text-decoration: none;
+      background: transparent;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .values-cta-btn:hover {
+      background: var(--deep);
+      color: var(--cream);
+      border-color: var(--deep);
+    }
+
+    .value-card {
+      padding: 48px 36px;
+      background: var(--light);
+      border-radius: 4px;
+      border: 1px solid rgba(167,146,119,0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform: perspective(800px) rotateX(2deg);
+      cursor: default;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .value-card.visible {
+      opacity: 1;
+      transform: translateY(0) perspective(800px) rotateX(0deg);
+    }
+    .value-card:hover {
+      transform: translateY(-6px) perspective(800px) rotateX(0deg) !important;
+      box-shadow: 0 20px 60px rgba(60,42,32,0.1);
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--brown), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .value-card:hover::before { opacity: 1; }
+
+    .value-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 60px;
+      font-weight: 700;
+      color: rgba(167,146,119,0.9);
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .value-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--deep);
+      margin-bottom: 12px;
+    }
+
+    .value-card p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--dark-brown);
+    }
+
+    /* ─── STEWARDS ─── */
+    .stewards {
+      background: linear-gradient(135deg, #1a0f0a 0%, #2c1810 50%, #1a0f0a 100%);
+      padding: 140px 40px;
+    }
+
+    .stewards-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .steward-card {
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .steward-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .steward-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+
+    .steward-era {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(167,146,119,0.6);
+      margin-bottom: 12px;
+    }
+
+    .steward-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 500;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .steward-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,242,225,0.55);
+    }
+
+    .steward-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--brown);
+      margin: 24px 0;
+    }
+
+    /* ─── STAT STRIP ─── */
+    .stat-strip {
+      background: var(--brown);
+      padding: 60px 40px;
+    }
+    .stat-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,242,225,0.65);
+    }
+
+    /* ─── CLOSING ─── */
+    .closing {
+      padding: 160px 40px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .closing-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: sepia(0.6) saturate(0.8) opacity(0.6);
+      margin-bottom: 40px;
+    }
+
+    .closing h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--deep);
+      margin-bottom: 24px;
+    }
+
+    .closing h2 em {
+      font-style: italic;
+      color: var(--brown);
+    }
+
+    .closing p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--dark-brown);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 28px clamp(24px, 6vw, 80px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--brown-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--brown-dark);
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--brown-light);
+      letter-spacing: 1px;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1200px) {
+      .hero-ring {
+        width: 560px;
+        height: 560px;
+        margin-top: -280px;
+        margin-left: -280px;
+      }
+
+      .hero-ring-outer {
+        width: 760px;
+        height: 760px;
+        margin-top: -380px;
+        margin-left: -380px;
+      }
+
+      .story,
+      .values,
+      .timeline-section,
+      .stewards,
+      .closing {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+
+      .story {
+        gap: 60px;
+      }
+
+      .story-card {
+        padding: 40px;
+      }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero {
+        min-height: 90svh;
+      }
+
+      .hero-content {
+        padding: 48px 18px 28px;
+      }
+
+      .hero-logo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 24px;
+      }
+
+      .hero-eyebrow {
+        font-size: 18px;
+        letter-spacing: 0.16em;
+      }
+
+      .hero-subtitle {
+        letter-spacing: 0.09em;
+      }
+
+      .hero-year-badge {
+        margin-top: 30px;
+        padding: 10px 20px;
+      }
+
+      .hero-ring {
+        width: 430px;
+        height: 430px;
+        margin-top: -215px;
+        margin-left: -215px;
+      }
+
+      .hero-ring-outer {
+        width: 600px;
+        height: 600px;
+        margin-top: -300px;
+        margin-left: -300px;
+      }
+
+      .story {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 80px 22px;
+      }
+
+      .story-number {
+        font-size: 96px;
+        top: -34px;
+        left: -8px;
+      }
+
+      .story-card {
+        padding: 34px 28px;
+        transform: none;
+      }
+
+      .story-card:hover {
+        transform: none;
+      }
+
+      .timeline-section,
+      .stewards,
+      .closing,
+      .values {
+        padding-top: 90px;
+        padding-bottom: 90px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        margin-top: 48px;
+      }
+
+      .stewards-inner {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+
+      .stat-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .tl-content h4 {
+        font-size: 18px;
+      }
+
+      .tl-content p {
+        font-size: 13px;
+      }
+
+      footer {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .strip-home-link {
+        top: 12px;
+        left: 12px;
+        min-height: 30px;
+        padding: 7px 11px;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 90px;
+        padding-bottom: 70px;
+      }
+
+      .hero-content {
+        padding: 20px 14px;
+      }
+
+      .hero-logo {
+        width: 120px;
+        height: 120px;
+      }
+
+      .hero-eyebrow {
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        margin-bottom: 14px;
+      }
+
+      .hero-title {
+        font-size: clamp(40px, 18vw, 66px);
+      }
+
+      .hero-subtitle {
+        margin-top: 18px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-year-badge span {
+        font-size: 16px;
+      }
+
+      .hero-ring,
+      .hero-ring-outer,
+      .scroll-hint {
+        display: none;
+      }
+
+      .strip-track {
+        gap: 36px;
+        animation-duration: 18s;
+      }
+
+      .story,
+      .values,
+      .timeline-section,
+      .stewards,
+      .closing,
+      .stat-strip {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .story {
+        padding-top: 70px;
+        padding-bottom: 70px;
+      }
+
+      .story-number {
+        font-size: 76px;
+        top: -26px;
+      }
+
+      .story-card {
+        padding: 24px 20px;
+      }
+
+      .story-tag {
+        margin-bottom: 14px;
+        padding-bottom: 8px;
+      }
+
+      .section-header {
+        margin-bottom: 48px;
+      }
+
+      .timeline::before {
+        display: block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr 36px 1fr;
+        margin-bottom: 28px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        border-radius: 0;
+        gap: 0;
+      }
+
+      .timeline-item:nth-child(odd) .tl-content,
+      .timeline-item:nth-child(even) .tl-content {
+        grid-column: auto;
+      }
+
+      .timeline-item:nth-child(odd) .tl-content {
+        text-align: right;
+        padding-right: 10px;
+        padding-left: 0;
+      }
+
+      .timeline-item:nth-child(even) .tl-content {
+        text-align: left;
+        padding-left: 10px;
+        padding-right: 0;
+      }
+
+      .timeline-item .tl-content {
+        order: 0;
+      }
+
+      .timeline-item .tl-empty {
+        display: block !important;
+      }
+
+      .tl-center {
+        order: 0;
+        grid-column: 2;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 5px;
+        margin-bottom: 0;
+      }
+
+      .tl-dot {
+        margin-top: 0;
+      }
+
+      .tl-year {
+        font-size: 9px;
+        letter-spacing: 0.04em;
+      }
+
+      .tl-content h4 {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .tl-content p {
+        font-size: 12px;
+        line-height: 1.65;
+      }
+
+      .value-card {
+        padding: 28px 22px;
+      }
+
+      .value-num {
+        font-size: 44px;
+        margin-bottom: 18px;
+      }
+
+      .values-cta {
+        margin-top: 30px;
+      }
+
+      .stat-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .closing {
+        padding-top: 90px;
+        padding-bottom: 100px;
+      }
+
+      .footer-copy {
+        letter-spacing: 0.04em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <a href="/" class="strip-home-link">Back To Home</a>
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring-outer"></div>
+
+  <div class="hero-content">
+    <img
+      src="/legacy-logo.png"
+      class="hero-logo"
+      alt="Wellfit Logo"
+    />
+    <div class="hero-eyebrow">Wellfit Menswear &amp; Selection</div>
+    <h1 class="hero-title">Our<br /><em>Legacy</em></h1>
+    <p class="hero-subtitle">Four Decades of Craft, Character &amp; Commitment</p>
+    <div class="hero-year-badge">
+      <span>Since 1984</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── MARQUEE STRIP ─── -->
+<div class="founded-strip">
+  <div class="strip-track">
+    <span class="strip-item">Est. 1984</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Quality First, Always</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Four Decades of Trust</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Menswear &amp; Selection</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Crafted with Integrity</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Generational Excellence</span>
+    <span class="strip-dot">◆</span>
+    <!-- repeat for seamless -->
+    <span class="strip-item">Est. 1984</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Quality First, Always</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Four Decades of Trust</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Menswear &amp; Selection</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Crafted with Integrity</span>
+    <span class="strip-dot">◆</span>
+    <span class="strip-item">Generational Excellence</span>
+    <span class="strip-dot">◆</span>
+  </div>
+</div>
+
+<!-- ─── ORIGIN STORY ─── -->
+<section>
+  <div class="story">
+    <div class="story-left">
+      <div class="story-number">40</div>
+      <div class="story-card">
+        <span class="story-tag">The Beginning · 1984</span>
+        <h2>Where a Dream was<br />Stitched into Existence</h2>
+        <p>In 1984, late Shri Vinubhai Pithadiya laid the foundation of Wellfit with nothing but an unwavering belief in the dignity of the well-dressed man. What began as a single, modest shop blossomed into a name synonymous with trust, refinement, and lasting quality across the region.</p>
+      </div>
+    </div>
+    <div class="story-right">
+      <h3>A name built<br />on honest fabric<br />&amp; honest dealings.</h3>
+      <p>Vinubhai understood that a suit is more than cloth - it is character made tangible. He curated each piece with the same care he extended to every customer who walked through his door. Word spread, not through advertisement, but through the quiet confidence of men who wore his selections.</p>
+      <p>Decades passed. Faces changed. But the warmth at Wellfit never did. Generation after generation returned - because quality, once experienced, is never forgotten.</p>
+      <div class="story-signature">
+        <div class="sig-line"></div>
+        <span class="sig-text">The Pithadiya Family Legacy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TIMELINE ─── -->
+<section class="timeline-section">
+  <div class="section-header">
+    <p class="section-eyebrow">A Journey Through Time</p>
+    <h2>Four Decades of<br /><em style="font-style:italic; color:var(--accent);">Milestones</em></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="tl-content">
+        <h4>Doors Open</h4>
+        <p>Shri Vinubhai Pithadiya inaugurates Wellfit Menswear, driven by a singular purpose - to clothe every man with dignity and distinction.</p>
+      </div>
+      <div class="tl-center">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1984</div>
+      </div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-empty"></div>
+      <div class="tl-center">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1990s</div>
+      </div>
+      <div class="tl-content">
+        <h4>Community Roots</h4>
+        <p>Wellfit becomes a household name - trusted by families across the city for weddings, ceremonies, and everyday elegance. A loyal community of patrons grows organically.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-content">
+        <h4>Expanding the Range</h4>
+        <p>The selection deepens. Wellfit broadens its curated offering - from formal suiting to premium casuals - always holding quality as the ultimate measure.</p>
+      </div>
+      <div class="tl-center">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2000s</div>
+      </div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-empty"></div>
+      <div class="tl-center">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2010s</div>
+      </div>
+      <div class="tl-content">
+        <h4>The Next Generation</h4>
+        <p>Vaibhav Vinubhai Pithadiya steps forward, carrying his father's vision into a new era - infusing fresh perspective while honouring the timeless values of the house.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-content">
+        <h4>40 Years Strong</h4>
+        <p>Wellfit stands today as a testament to integrity across generations - with the same handshake warmth, the same uncompromised standards, and a legacy that continues to grow.</p>
+      </div>
+      <div class="tl-center">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Today</div>
+      </div>
+      <div class="tl-empty"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<div class="stat-strip">
+  <div class="stat-inner">
+    <div class="stat-item">
+      <div class="stat-num">40<span style="font-size:0.5em; vertical-align:super; opacity:0.6;">+</span></div>
+      <div class="stat-label">Years in Business</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Generations of Leadership</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Loyal Patrons</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Uncompromising Standard</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── VALUES ─── -->
+<section>
+  <div class="values">
+      <div class="reveal">
+        <p class="section-label">What We Offer</p>
+        <h2 class="section-title">A Selection <em>Curated</em> for Every Gentleman</h2>
+      </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3>Premium Menswear</h3>
+        <p>Shirts, trousers, sherwanis, suits, and casualwear - a comprehensive range of men's clothing chosen for fabric quality, fit, and enduring style.</p>
+      </div>
+      <div class="value-card" style="transition-delay: 0.15s;">
+        <div class="value-num">02</div>
+        <h3>Bespoke Tailoring</h3>
+        <p>Custom-fitted garments crafted to your exact measurements. Because a perfect fit is not a luxury - it is a standard at Wellfit.</p>
+      </div>
+      <div class="value-card" style="transition-delay: 0.3s;">
+        <div class="value-num">03</div>
+        <h3>Corporate Uniform Solutions</h3>
+        <p>We partner with companies to design and manufacture professional employee uniforms - consistent, durable, and representative of your brand identity.</p>
+      </div>
+    </div>
+    <div class="values-cta">
+      <a href="/products" class="values-cta-btn">Take a Look</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE STEWARDS ─── -->
+<section class="stewards">
+  <div class="section-header" style="margin-bottom:80px;">
+    <p class="section-eyebrow">The Guardians of the Legacy</p>
+    <h2 style="color:var(--cream);">The Men Behind<br /><em style="font-style:italic; color:var(--accent);">Wellfit</em></h2>
+  </div>
+
+  <div class="stewards-inner">
+    <div class="steward-card">
+      <p class="steward-label">Founder &amp; Visionary</p>
+      <h3 class="steward-name">Late Shri<br />Vinubhai M. Pithadiya</h3>
+      <div class="steward-divider"></div>
+      <p class="steward-desc">A man of vision and impeccable character, Vinubhai built Wellfit from the ground up with nothing but integrity, dedication, and a deep respect for the craft. His legacy is not merely a shop - it is a standard of living that continues to inspire every corner of the establishment he built.</p>
+    </div>
+
+    <div class="steward-card" style="transition-delay:0.2s;">
+      <p class="steward-label">Proprietor</p>
+      <h3 class="steward-name">Shri<br />Vaibhav V. Pithadiya</h3>
+      <div class="steward-divider"></div>
+      <p class="steward-desc">Raised in the spirit of Wellfit, Vaibhav leads the next chapter with the same warmth and conviction that defined his father's era. He bridges generations - honouring the timeless values of the house while guiding it toward the future with purpose and passion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+  <footer>
+    <p class="footer-brand">Wellfit Menswear & Selection</p>
+    <p class="footer-copy">© 2024 · Founded 1984 by Late Shri Vinubhai Pithadiya</p>
+  </footer>
+
+
+<script>
+  // ── Scroll-triggered reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item, .value-card, .steward-card').forEach(el => {
+    observer.observe(el);
+  });
+
+  // ── Subtle 3D tilt on value cards ──
+  document.querySelectorAll('.value-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `
+        perspective(800px)
+        rotateX(${-y * 8}deg)
+        rotateY(${x * 8}deg)
+        translateY(-4px)
+      `;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
+
+  // ── Hero logo 3D float ──
+  const logo = document.querySelector('.hero-logo');
+  let t = 0;
+  function floatLogo() {
+    t += 0.015;
+    const y = Math.sin(t) * 6;
+    logo.style.transform = `translateY(${y}px) rotateY(${Math.sin(t * 0.5) * 8}deg)`;
+    requestAnimationFrame(floatLogo);
+  }
+  floatLogo();
+</script>
+
+</body>
+</html>
