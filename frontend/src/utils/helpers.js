@@ -41,7 +41,7 @@ export const getImageUrl = (path) => {
   if (!path) return 'https://placehold.co/400x500/FFF2E1/A79277?text=Wellfit';
   const source = String(path).trim();
   if (!source) return 'https://placehold.co/400x500/FFF2E1/A79277?text=Wellfit';
-  if (source.startsWith('http://') || source.startsWith('https://')) return source;
+  if (source.startsWith('http://') || source.startsWith('https://') || source.startsWith('//')) return source;
 
   const baseUrl = (import.meta.env.VITE_API_URL?.replace('/api', '') || '').replace(/\/$/, '');
   const normalizedPath = source.startsWith('/') ? source : `/${source}`;
@@ -62,10 +62,17 @@ export const hasPurchasableStock = (product) => {
 };
 
 export const getProductMainImage = (product) => {
-  if (!product) return '';
-  const variants = Array.isArray(product.variants) ? product.variants : [];
-  const firstVariantImage = variants.find(v => v.image)?.image;
-  const firstProductImage = Array.isArray(product.images) ? product.images.find(img => !!img) : null;
-  return firstVariantImage || firstProductImage || '';
+  const allImages = getAllProductImages(product);
+  return allImages[0] || '';
 };
+
+export const getAllProductImages = (product) => {
+  if (!product) return [];
+  const productImages = Array.isArray(product.images) ? product.images.filter(Boolean) : [];
+  const variantImages = (Array.isArray(product.variants) ? product.variants : [])
+    .map((v) => v.image)
+    .filter(Boolean);
+  return [...new Set([...variantImages, ...productImages])];
+};
+
 
