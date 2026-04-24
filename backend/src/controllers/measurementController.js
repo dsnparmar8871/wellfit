@@ -15,8 +15,11 @@ const SLOT_INTERVAL_MINUTES = 10;
 const isDuplicateKeyError = (err) => err && err.code === 11000;
 
 const isWithinShopHours = (date) => {
-  const h = date.getHours();
-  const m = date.getMinutes();
+  // Use toLocaleString to get the hour and minute in IST
+  const options = { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: 'numeric', hour12: false };
+  const istTime = date.toLocaleString('en-US', options);
+  const [h, m] = istTime.split(':').map(Number);
+
   if (h < SHOP_OPEN_HOUR) return false;
   if (h > SHOP_CLOSE_HOUR) return false;
   if (h === SHOP_CLOSE_HOUR && m > 0) return false;
