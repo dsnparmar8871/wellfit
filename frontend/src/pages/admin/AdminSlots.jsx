@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { adminAPI } from '../../api/index.js';
 import { useToast } from '../../context/ToastContext.jsx';
-import { formatDateTime, getErrorMsg } from '../../utils/helpers.js';
+import { formatDateTime, getErrorMsg, isValidMeasurementTime } from '../../utils/helpers.js';
 import PageSkeleton from '../../components/ui/PageSkeleton.jsx';
 import StatusBadge from '../../components/ui/StatusBadge.jsx';
 import Modal from '../../components/ui/Modal.jsx';
@@ -34,7 +34,7 @@ export default function AdminSlots() {
         const list = Array.isArray(data.data) ? data.data : (data.data?.slots || []);
         setSlots(list);
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => {
         setLoading(false);
         if (keepSearchFocusRef.current && searchInputRef.current) {
@@ -64,6 +64,9 @@ export default function AdminSlots() {
 
   const handleReschedule = async () => {
     if (!rescheduleDate || !rescheduleTime) return toast.error('Please select date and time slot');
+    if (!isValidMeasurementTime(rescheduleTime)) {
+      return toast.error('Booking is allowed only between 09:00 AM and 10:00 PM');
+    }
     setSaving(true);
     try {
       const selectedDateTime = `${rescheduleDate}T${rescheduleTime}`;

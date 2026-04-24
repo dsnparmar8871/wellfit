@@ -190,6 +190,10 @@ const bookSlot = async (req, res) => {
       return errorResponse(res, 400, 'Booking allowed only between 09:00 AM and 10:00 PM');
     }
 
+    if (slotDate < new Date()) {
+      return errorResponse(res, 400, 'Booking date and time must be in the future');
+    }
+
     // Check for conflicts (within 10 minutes)
     const conflictWindow = 10 * 60 * 1000;
     const existing = await MeasurementSlot.findOne({

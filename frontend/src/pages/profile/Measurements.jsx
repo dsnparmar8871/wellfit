@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '../../context/ToastContext.jsx';
 import { measurementAPI } from '../../api/index.js';
-import { formatDateTime, getErrorMsg } from '../../utils/helpers.js';
+import { formatDateTime, getErrorMsg, isValidMeasurementTime } from '../../utils/helpers.js';
 import PageSkeleton from '../../components/ui/PageSkeleton.jsx';
 import Modal from '../../components/ui/Modal.jsx';
 import StatusBadge from '../../components/ui/StatusBadge.jsx';
@@ -58,7 +58,7 @@ export default function Measurements() {
   const bookSlot = async () => {
     if (!slotForm.date || !slotForm.time) return toast.error('Please select date and time');
     if (!slotForm.garmentType) return toast.error('Please select garment type');
-    if (slotForm.time < '09:00' || slotForm.time > '22:00') {
+    if (!isValidMeasurementTime(slotForm.time)) {
       return toast.error('Booking is allowed only between 09:00 AM and 10:00 PM');
     }
     setSaving(true);

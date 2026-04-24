@@ -1,5 +1,8 @@
-export const formatPrice = (price) =>
-  new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price);
+export const formatPrice = (price) => {
+  const num = Number(price);
+  if (isNaN(num)) return 'Rs. 0';
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
+};
 
 export const formatDate = (d) =>
   d ? new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(d)) : '—';
@@ -13,6 +16,14 @@ export const getErrorMsg = (err) =>
 export const STRONG_PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 export const PASSWORD_RULE_MESSAGE = 'Password must be at least 8 characters and include at least 1 uppercase letter, 1 number, and 1 special character';
 export const isStrongPassword = (password = '') => STRONG_PASSWORD_REGEX.test(password);
+
+export const isValidMeasurementTime = (time) => {
+  if (!time) return false;
+  const [h, m] = String(time).split(':').map(Number);
+  const totalMins = (h || 0) * 60 + (m || 0);
+  // 09:00 = 540 mins, 22:00 = 1320 mins
+  return totalMins >= 540 && totalMins <= 1320;
+};
 
 export const statusBadgeClass = (status) => {
   const map = {
