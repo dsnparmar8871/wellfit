@@ -4,7 +4,7 @@ import { productAPI, reviewAPI } from '../api/index.js';
 import { useCart } from '../context/CartContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
-import { formatPrice, getImageUrl, formatDate, getErrorMsg, getInStockVariants, hasPurchasableStock } from '../utils/helpers.js';
+import { formatPrice, getImageUrl, formatDate, getErrorMsg, getInStockVariants, hasPurchasableStock, getProductMainImage } from '../utils/helpers.js';
 import StarRating from '../components/ui/StarRating.jsx';
 import PageSkeleton from '../components/ui/PageSkeleton.jsx';
 import AppIcon from '../components/ui/AppIcon.jsx';
@@ -67,7 +67,7 @@ export default function ProductDetail() {
       name: product.productName || product.name,
       price: effectivePrice,
       mrp: Math.max(effectiveMrp, effectivePrice),
-      image: selectedVariant.image || product.images?.[0],
+      image: selectedVariant.image || getProductMainImage(product),
       size: selectedVariant.size,
       color: selectedVariant.color,
       maxStock: Number(selectedVariant.stock || 0),
@@ -140,7 +140,7 @@ export default function ProductDetail() {
       name: item.productName || item.name,
       price,
       mrp: Math.max(mrp, price),
-      image: defaultVariant?.image || item.images?.[0],
+      image: defaultVariant?.image || getProductMainImage(item),
       size: defaultVariant?.size,
       color: defaultVariant?.color,
       maxStock: stock,
@@ -187,7 +187,7 @@ export default function ProductDetail() {
         name: item.productName || item.name,
         price,
         mrp: Math.max(mrp, price),
-        image: defaultVariant?.image || item.images?.[0],
+        image: defaultVariant?.image || getProductMainImage(item),
         size: defaultVariant?.size,
         color: defaultVariant?.color,
         maxStock: stock,
@@ -530,7 +530,7 @@ export default function ProductDetail() {
                       <Link key={item._id} to={`/products/${item._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                         <div className="suggestion-card" style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 10, background: 'var(--white)' }}>
                           <img
-                            src={getImageUrl(item.images?.[0])}
+                            src={getImageUrl(getProductMainImage(item))}
                             alt={item.productName || item.name}
                             className="suggestion-image"
                             style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', borderRadius: 8, marginBottom: 8 }}
@@ -598,7 +598,7 @@ export default function ProductDetail() {
                       <Link key={item._id} to={`/products/${item._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                         <div className="suggestion-card" style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 10, background: 'var(--white)' }}>
                           <img
-                            src={getImageUrl(item.images?.[0])}
+                            src={getImageUrl(getProductMainImage(item))}
                             alt={item.productName || item.name}
                             className="suggestion-image"
                             style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', borderRadius: 8, marginBottom: 8 }}

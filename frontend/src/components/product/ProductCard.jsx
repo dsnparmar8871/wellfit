@@ -4,7 +4,7 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useFavorites } from '../../context/FavoritesContext.jsx';
 import { useToast } from '../../context/ToastContext.jsx';
-import { formatPrice, getImageUrl } from '../../utils/helpers.js';
+import { formatPrice, getImageUrl, getProductMainImage } from '../../utils/helpers.js';
 import AppIcon from '../ui/AppIcon.jsx';
 
 export default function ProductCard({ product }) {
@@ -28,7 +28,7 @@ export default function ProductCard({ product }) {
   const defaultVariant = firstInStockVariant || variants[0];
   const hasVariantStock = variants.some((v) => Number(v?.stock || 0) > 0);
   const inStock = variants.length > 0 ? hasVariantStock : Number(product.totalStock || 0) > 0;
-  const primaryImage = firstInStockVariant?.image || safeProductImages[0] || product.images?.[0];
+  const primaryImage = firstInStockVariant?.image || getProductMainImage(product);
   const categoryLabel = [product.mainCategory, product.subCategory, product.itemCategory].filter(Boolean).join(' / ');
   const cardPrice = Number(defaultVariant?.price ?? product.price ?? 0);
   const cardMrp = Number(defaultVariant?.mrp ?? product.mrp ?? cardPrice);

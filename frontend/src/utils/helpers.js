@@ -60,3 +60,12 @@ export const hasPurchasableStock = (product) => {
   }
   return Number(product?.totalStock ?? product?.stock ?? 0) > 0;
 };
+
+export const getProductMainImage = (product) => {
+  if (!product) return '';
+  const variants = Array.isArray(product.variants) ? product.variants : [];
+  const firstVariantImage = variants.find(v => v.image)?.image;
+  const firstProductImage = Array.isArray(product.images) ? product.images.find(img => !!img) : null;
+  return firstVariantImage || firstProductImage || '';
+};
+
