@@ -55,7 +55,7 @@ function StripePaymentForm({ orderId, clientSecret, simulated, onPaymentSuccess,
       });
 
       if (result.error) {
-        toast.error(result.error.message || 'Payment failed');
+        toast.error('Payment failed. Please try again.');
         return;
       }
 
@@ -215,11 +215,8 @@ export default function StripePayment() {
       const finalizeRedirectPayment = async () => {
         try {
           setLoading(true);
-          const result = await finalizeSuccessfulPayment(paymentIntentId);
+          await finalizeSuccessfulPayment(paymentIntentId);
           clearCart();
-          if (result?.orderId && !orderId) {
-            navigate(`/payment-success?orderId=${result.orderId}`);
-          }
         } catch (err) {
           toast.error(getErrorMsg(err));
           if (orderId) navigate(`/profile/orders/${orderId}`);
