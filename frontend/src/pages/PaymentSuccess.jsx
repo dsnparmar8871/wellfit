@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import { orderAPI, measurementAPI } from '../api/index.js';
-import { formatPrice, getErrorMsg, formatDateTime, isValidMeasurementTime } from '../utils/helpers.js';
+import { formatPrice, getErrorMsg, formatDateTime } from '../utils/helpers.js';
 import EmptyState from '../components/ui/EmptyState.jsx';
 import PageSkeleton from '../components/ui/PageSkeleton.jsx';
 import Modal from '../components/ui/Modal.jsx';
@@ -25,6 +25,7 @@ export default function PaymentSuccess() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const toast = useToast();
+  const orderLoadStartedRef = useRef(false);
 
   const orderId = searchParams.get('orderId');
   const [order, setOrder] = useState(null);
@@ -37,6 +38,9 @@ export default function PaymentSuccess() {
   const [slotForm, setSlotForm] = useState({ date: '', time: '', notes: '' });
 
   useEffect(() => {
+    if (orderLoadStartedRef.current) return;
+    orderLoadStartedRef.current = true;
+
     if (!orderId) {
       navigate('/');
       return;
@@ -119,14 +123,10 @@ export default function PaymentSuccess() {
       toast.error('Please select date and time');
       return;
     }
-    if (!isValidMeasurementTime(slotForm.time)) {
-      toast.error('Booking is allowed only between 09:00 AM and 10:00 PM');
-      return;
-    }
 
     const itemKey = `${currentSlotItem.product?.id || currentSlotItem.product?._id}-${currentSlotItem._id}`;
     setProcessingSlot(itemKey);
-
+    
     try {
       const dateTime = new Date(`${slotForm.date}T${slotForm.time}`);
       const { data } = await measurementAPI.bookSlot({
@@ -234,7 +234,7 @@ export default function PaymentSuccess() {
               {slotBookingItems.map((item, idx) => {
                 const itemKey = getItemKey(item);
                 const isBooked = !!orderBookedSlotId || !!bookingSlots[itemKey] || !!item.measurementSlotId;
-
+                
                 return (
                   <div key={idx} style={{
                     padding: 12,
