@@ -37,7 +37,7 @@ export default function Footer() {
               Google Map
             </a>
             <p className="wf-footer-text" style={{ fontSize: 13, color: '#A09090', marginBottom: 6 }}>Mobile No.: 1234567890</p>
-            <p className="wf-footer-text" style={{ fontSize: 13, color: '#A09090' }}>Email: contact@wellfitms.com</p>
+            <p className="wf-footer-text" style={{ fontSize: 13, color: '#A09090' }}>Email: contact.wellfit1984@gmail.com</p>
             <a href="/legacy.html" className="wf-footer-legacy-mobile" style={{
               marginTop: 10,
               display: 'none',
@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
         <div className="wf-footer-bottom" style={{ borderTop: '1px solid #3A3030', paddingTop: 20, fontSize: 12, color: '#706060', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
           <span>© {new Date().getFullYear()} Wellfit Menswear & Selection. All rights reserved.</span>
-          <span>Made by Darshan, Harsh & Kartik.</span>
+          <span>Made by Darshan.</span>
         </div>
       </div>
       <style>{`
