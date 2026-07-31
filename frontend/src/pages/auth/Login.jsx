@@ -14,7 +14,7 @@ export default function Login() {
 
   const TEMP_LOGIN_USERS = {
     admin: { email: 'admin@wellfit.com', password: 'admin123', label: 'Admin' },
-    customer: { email: 'zeelparmar7805@gmail.com', password: 'Dsnp@123', label: 'Customer' },
+    customer: { email: 'testcustomer@try.com', password: 'Test@123', label: 'Customer' },
     tailor: { email: 'babulal@wellfit.com', password: 'Babulal@123', label: 'Tailor' },
   };
 
@@ -92,13 +92,6 @@ export default function Login() {
           <div style={{ textAlign: 'center', marginTop: 20, fontSize: 14, color: 'var(--text-light)' }}>
             Don't have an account? <Link to="/register" style={{ fontWeight: 600 }}>Sign Up</Link>
           </div>
-        </div>
-        {/* Demo credentials */}
-        <div style={{ marginTop: 20, background: '#FFF8F0', border: '1px solid var(--border)', borderRadius: 8, padding: 14, fontSize: 12, color: 'var(--text-light)' }}>
-          <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--text)' }}>Demo Credentials</div>
-          <div>Admin: admin@wellfit.com / admin123</div>
-          <div>Customer: zeelparmar7805@gmail.com / Dsnp@123</div>
-          <div>Tailor: babulal@wellfit.com / Babulal@123</div>
         </div>
       </div>
     </div>
